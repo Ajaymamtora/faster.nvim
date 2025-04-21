@@ -47,11 +47,13 @@ function M.disable_all_features()
 end
 
 function M.run_on_features(feature_names, func, cond_func)
-  if func == nil then return end
+  if func == nil then
+    return
+  end
 
   local features = {}
 
-  if feature_names == 'all' then
+  if feature_names == "all" then
     features = FasterConfig.features
   else
     for _, fname in ipairs(feature_names) do

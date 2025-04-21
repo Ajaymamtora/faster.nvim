@@ -8,22 +8,22 @@ M.illuminate = {
   defer = false,
 
   commands = function()
-    vim.api.nvim_create_user_command('FasterEnableIlluminate', M.illuminate.enable, {})
-    vim.api.nvim_create_user_command('FasterDisableIlluminate', M.illuminate.disable, {})
+    vim.api.nvim_create_user_command("FasterEnableIlluminate", M.illuminate.enable, {})
+    vim.api.nvim_create_user_command("FasterDisableIlluminate", M.illuminate.disable, {})
   end,
 
   enable = function()
-    if vim.fn.exists(':IlluminateResumeBuf') ~= 2 then
+    if vim.fn.exists(":IlluminateResumeBuf") ~= 2 then
       return
     end
-    vim.cmd('IlluminateResumeBuf')
+    vim.cmd("IlluminateResumeBuf")
   end,
 
   disable = function()
-    if vim.fn.exists(':IlluminatePauseBuf') ~= 2 then
+    if vim.fn.exists(":IlluminatePauseBuf") ~= 2 then
       return
     end
-    vim.cmd('IlluminatePauseBuf')
+    vim.cmd("IlluminatePauseBuf")
   end,
 }
 
@@ -34,23 +34,23 @@ M.matchparen = {
   defer = false,
 
   commands = function()
-    vim.api.nvim_create_user_command('FasterEnableMatchparen', M.matchparen.enable, {})
-    vim.api.nvim_create_user_command('FasterDisableMatchparen', M.matchparen.disable, {})
+    vim.api.nvim_create_user_command("FasterEnableMatchparen", M.matchparen.enable, {})
+    vim.api.nvim_create_user_command("FasterDisableMatchparen", M.matchparen.disable, {})
   end,
 
   enable = function()
-    if vim.fn.exists(':DoMatchParen') ~= 2 then
+    if vim.fn.exists(":DoMatchParen") ~= 2 then
       return
     end
-    vim.cmd('DoMatchParen')
+    vim.cmd("DoMatchParen")
   end,
 
   disable = function()
-    if vim.fn.exists(':NoMatchParen') ~= 2 then
+    if vim.fn.exists(":NoMatchParen") ~= 2 then
       return
     end
-    vim.cmd('NoMatchParen')
-  end
+    vim.cmd("NoMatchParen")
+  end,
 }
 
 -- LSP
@@ -60,25 +60,24 @@ M.lsp = {
   defer = false,
 
   commands = function()
-    vim.api.nvim_create_user_command('FasterEnableLsp', M.lsp.enable, {})
-    vim.api.nvim_create_user_command('FasterDisableLsp', M.lsp.disable, {})
+    vim.api.nvim_create_user_command("FasterEnableLsp", M.lsp.enable, {})
+    vim.api.nvim_create_user_command("FasterDisableLsp", M.lsp.disable, {})
   end,
 
   enable = function()
-    if vim.fn.exists(':LspStart') ~= 2 then
+    if vim.fn.exists(":LspStart") ~= 2 then
       return
     end
-    vim.cmd('LspStart')
+    vim.cmd("LspStart")
   end,
 
   disable = function()
-    if vim.fn.exists(':LspStop') ~= 2 then
+    if vim.fn.exists(":LspStop") ~= 2 then
       return
     end
-    vim.cmd('LspStop')
-  end
+    vim.cmd("LspStop")
+  end,
 }
-
 
 -- Treesitter
 
@@ -90,17 +89,17 @@ M.treesitter = {
   defer = false,
 
   commands = function()
-    vim.api.nvim_create_user_command('FasterEnableTreesitter', M.treesitter.enable, {})
-    vim.api.nvim_create_user_command('FasterDisableTreesitter', M.treesitter.disable, {})
+    vim.api.nvim_create_user_command("FasterEnableTreesitter", M.treesitter.enable, {})
+    vim.api.nvim_create_user_command("FasterDisableTreesitter", M.treesitter.disable, {})
   end,
 
   enable = function()
-    local status_ok, _ = pcall(require, 'nvim-treesitter.configs')
+    local status_ok, _ = pcall(require, "nvim-treesitter.configs")
     if not status_ok then
       return
     end
 
-    if vim.fn.exists(':TSBufEnable') ~= 2 then
+    if vim.fn.exists(":TSBufEnable") ~= 2 then
       return
     end
 
@@ -108,7 +107,7 @@ M.treesitter = {
       -- Return treesitter module state from backup
       for _, mod_state in ipairs(treesitter_backup) do
         if mod_state.enable then
-          vim.cmd('TSBufEnable ' .. mod_state.mod_name)
+          vim.cmd("TSBufEnable " .. mod_state.mod_name)
         end
       end
       treesitter_disabled = false
@@ -116,12 +115,12 @@ M.treesitter = {
   end,
 
   disable = function()
-    local status_ok, ts_config = pcall(require, 'nvim-treesitter.configs')
+    local status_ok, ts_config = pcall(require, "nvim-treesitter.configs")
     if not status_ok then
       return
     end
 
-    if vim.fn.exists(':TSBufDisable') ~= 2 then
+    if vim.fn.exists(":TSBufDisable") ~= 2 then
       return
     end
 
@@ -135,10 +134,9 @@ M.treesitter = {
     end
 
     for _, mod_name in ipairs(ts_config.available_modules()) do
-      vim.cmd('TSBufDisable ' .. mod_name)
+      vim.cmd("TSBufDisable " .. mod_name)
     end
-  end
-
+  end,
 }
 
 -- Indent Blankline
@@ -149,25 +147,24 @@ M.indent_blankline = {
   defer = false,
 
   commands = function()
-    vim.api.nvim_create_user_command('FasterEnableIndentblankline', M.indent_blankline.enable, {})
-    vim.api.nvim_create_user_command('FasterDisableIndentblankline', M.indent_blankline.disable, {})
+    vim.api.nvim_create_user_command("FasterEnableIndentblankline", M.indent_blankline.enable, {})
+    vim.api.nvim_create_user_command("FasterDisableIndentblankline", M.indent_blankline.disable, {})
   end,
 
   enable = function()
-    if vim.fn.exists(':IBLEnable') ~= 2 then
+    if vim.fn.exists(":IBLEnable") ~= 2 then
       return
     end
-    vim.cmd('IBLEnable')
+    vim.cmd("IBLEnable")
   end,
 
   disable = function()
-    if vim.fn.exists(':IBLDisable') ~= 2 then
+    if vim.fn.exists(":IBLDisable") ~= 2 then
       return
     end
-    vim.cmd('IBLDisable')
-  end
+    vim.cmd("IBLDisable")
+  end,
 }
-
 
 -- Vimopts
 --
@@ -180,8 +177,8 @@ M.vimopts = {
   defer = false,
 
   commands = function()
-    vim.api.nvim_create_user_command('FasterEnableVimopts', M.vimopts.enable, {})
-    vim.api.nvim_create_user_command('FasterDisableVimopts', M.vimopts.disable, {})
+    vim.api.nvim_create_user_command("FasterEnableVimopts", M.vimopts.enable, {})
+    vim.api.nvim_create_user_command("FasterDisableVimopts", M.vimopts.disable, {})
   end,
 
   enable = function()
@@ -206,11 +203,11 @@ M.vimopts = {
     end
 
     vim.opt_local.swapfile = false
-    vim.opt_local.foldmethod = 'manual'
+    vim.opt_local.foldmethod = "manual"
     vim.opt_local.undolevels = -1
     vim.opt_local.undoreload = 0
     vim.opt_local.list = false
-  end
+  end,
 }
 
 -- Syntax
@@ -223,8 +220,8 @@ M.syntax = {
   defer = true,
 
   commands = function()
-    vim.api.nvim_create_user_command('FasterEnableSyntax', M.syntax.enable, {})
-    vim.api.nvim_create_user_command('FasterDisableSyntax', M.syntax.disable, {})
+    vim.api.nvim_create_user_command("FasterEnableSyntax", M.syntax.enable, {})
+    vim.api.nvim_create_user_command("FasterDisableSyntax", M.syntax.disable, {})
   end,
 
   enable = function()
@@ -239,11 +236,10 @@ M.syntax = {
       syntax_backup.syntax = vim.opt_local.syntax
       syntax_disabled = true
     end
-    vim.cmd 'syntax clear'
-    vim.opt_local.syntax = 'off'
-  end
+    vim.cmd("syntax clear")
+    vim.opt_local.syntax = "off"
+  end,
 }
-
 
 -- Filetype
 
@@ -255,8 +251,8 @@ M.filetype = {
   defer = true,
 
   commands = function()
-    vim.api.nvim_create_user_command('FasterEnableFiletype', M.filetype.enable, {})
-    vim.api.nvim_create_user_command('FasterDisableFiletype', M.filetype.disable, {})
+    vim.api.nvim_create_user_command("FasterEnableFiletype", M.filetype.enable, {})
+    vim.api.nvim_create_user_command("FasterDisableFiletype", M.filetype.disable, {})
   end,
 
   enable = function()
@@ -272,7 +268,7 @@ M.filetype = {
       filetype_disabled = true
     end
     vim.opt_local.filetype = ""
-  end
+  end,
 }
 
 -- Lualine
@@ -283,21 +279,21 @@ M.lualine = {
   defer = false,
 
   commands = function()
-    vim.api.nvim_create_user_command('FasterEnableLualine', M.lualine.enable, {})
-    vim.api.nvim_create_user_command('FasterDisableLualine', M.lualine.disable, {})
+    vim.api.nvim_create_user_command("FasterEnableLualine", M.lualine.enable, {})
+    vim.api.nvim_create_user_command("FasterDisableLualine", M.lualine.disable, {})
   end,
 
   enable = function()
     pcall(function()
-      require('lualine').hide({ unhide = true })
+      require("lualine").hide({ unhide = true })
     end)
   end,
 
   disable = function()
     pcall(function()
-      require('lualine').hide()
+      require("lualine").hide()
     end)
-  end
+  end,
 }
 
 return M
